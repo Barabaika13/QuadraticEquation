@@ -3,20 +3,7 @@
 namespace QuadraticEquation
 {
     internal class Program
-    {
-        enum Severity
-        {
-            Error,
-            Warning,
-            Information,
-        }
-        public class NoRootsException : Exception
-        {
-            public NoRootsException(string message) : base(message)
-            {
-            }
-        }
-
+    {          
         static void Main(string[] args)
         {
             Console.WriteLine("a * x^2 + b * x + c = 0");
