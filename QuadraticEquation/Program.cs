@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.ComponentModel.Design;
 
 namespace QuadraticEquation
 {
@@ -75,34 +74,21 @@ namespace QuadraticEquation
                             int value = (int)parsed;
                         }
                     }
-                    catch (OverflowException e)
+                    catch (OverflowException)
                     {
                         Console.BackgroundColor = ConsoleColor.Green;
-                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.Black;                        
                         Console.WriteLine($"{pair.Key} = {pair.Value}");
                         Console.WriteLine("Введите значение в пределах от -2147483648 до 2147483647");
                     }
-                }
-
-
-
-
-                //else if (long.TryParse(pair.Value, out var parsed) && (parsed < int.MinValue | parsed > int.MaxValue))
-                //{
-                //    Console.BackgroundColor = ConsoleColor.Green;
-                //    Console.ForegroundColor = ConsoleColor.Black;
-                //    string separator = new string('-', 50);
-                //    Console.WriteLine(separator);
-                //    Console.WriteLine($"{pair.Key} = {pair.Value}");
-                //    Console.ResetColor();
-                //}
-
+                }               
 
                 else
                 {
                     list.Add(result);
                 }
             }
+
             if (!noError)
             {
                 var e = new FormatException("");
@@ -113,15 +99,6 @@ namespace QuadraticEquation
             }
             return list;
         }
-
-       
-
-
-
-
-
-
-
 
         static void FormatData(string message, Severity severity, IDictionary data)
         {
