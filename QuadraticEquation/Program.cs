@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.ComponentModel.Design;
 
 namespace QuadraticEquation
 {
@@ -54,10 +55,8 @@ namespace QuadraticEquation
                 Console.WriteLine("Коэффициент a не может быть равен 0");
                 Console.ResetColor();
             }
-
             foreach (var pair in inputList)
             {
-
                 if (!int.TryParse(pair.Value, out int result))
                 {
                     noError = false;
@@ -67,13 +66,43 @@ namespace QuadraticEquation
                     Console.WriteLine(separator);
                     Console.WriteLine($"Неверный формат коэффициента {pair.Key}");
                     Console.ResetColor();
+
+                    try
+                    {
+                        checked
+                        {
+                            bool longResult = long.TryParse(pair.Value, out var parsed);
+                            int value = (int)parsed;
+                        }
+                    }
+                    catch (OverflowException e)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Green;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.WriteLine($"{pair.Key} = {pair.Value}");
+                        Console.WriteLine("Введите значение в пределах от -2147483648 до 2147483647");
+                    }
                 }
+
+
+
+
+                //else if (long.TryParse(pair.Value, out var parsed) && (parsed < int.MinValue | parsed > int.MaxValue))
+                //{
+                //    Console.BackgroundColor = ConsoleColor.Green;
+                //    Console.ForegroundColor = ConsoleColor.Black;
+                //    string separator = new string('-', 50);
+                //    Console.WriteLine(separator);
+                //    Console.WriteLine($"{pair.Key} = {pair.Value}");
+                //    Console.ResetColor();
+                //}
+
+
                 else
                 {
                     list.Add(result);
                 }
             }
-
             if (!noError)
             {
                 var e = new FormatException("");
@@ -84,6 +113,15 @@ namespace QuadraticEquation
             }
             return list;
         }
+
+       
+
+
+
+
+
+
+
 
         static void FormatData(string message, Severity severity, IDictionary data)
         {
