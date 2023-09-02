@@ -17,11 +17,7 @@ namespace QuadraticEquation
                 catch (FormatException e)
                 {
                     FormatData(e.Message, Severity.Error, e.Data);
-                }
-                catch (OverflowException e)
-                {
-                    FormatData(e.Message, Severity.Information, e.Data);
-                }
+                }               
                 catch (Exception e)
                 {
                     FormatData(e.Message, Severity.Warning, null);
